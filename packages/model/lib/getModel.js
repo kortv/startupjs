@@ -15,11 +15,14 @@ var DEFAULT_CLIENT_OPTIONS = {
 }
 var DEFAULT_UNLOAD_DELAY = 3000 // short delay, like 100, might be better
 
+var _socket
 racer.Model.prototype._createSocket = function () {
+  if(_socket) return _socket
   var clientOptions =
     (typeof window !== 'undefined' && window.__racerHighwayClientOptions) ||
     DEFAULT_CLIENT_OPTIONS
-  return new Socket(clientOptions)
+  _socket = new Socket(clientOptions)
+  return _socket
 }
 
 export default function getModel () {
